@@ -1,4 +1,220 @@
 /* ==========================================================================
+   1. VARIABLES Y RESET (PALETA DE COLORES STYLE TILE)
+   ========================================================================== */
+:root {
+    /* Colores Base del Style Tile */
+    --primary: #0F766E;
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    --neutral: #1E293B;
+    --light: #E2E8F0;
+    --white: #ffffff;
+
+    /* Fondos Claros derivados */
+    --bg-success: #DCFCE7;
+    --bg-warning: #FEF3C7;
+    --bg-danger: #FEE2E2;
+    --bg-light: #F8FAFC;
+    --bg-page: #F1F5F9;
+
+    /* Grises para textos y bordes */
+    --text-main: #1E293B;
+    --text-sec: #475569;
+    --text-meta: #94A3B8;
+    --border: #E2E8F0;
+
+    /* Mapeo a variables antiguas para compatibilidad */
+    --g950: var(--neutral);
+    --g900: var(--neutral);
+    --g800: var(--neutral);
+    --g700: var(--text-sec);
+    --g600: var(--text-sec);
+    --g500: var(--text-meta);
+    --g400: #CBD5E1;
+    --g300: var(--border);
+    --g200: var(--light);
+    --g100: var(--bg-light);
+    --g50:  #F8FAFC;
+    --w:    var(--white);
+
+    /* Semántica */
+    --rojo-wire: var(--danger);
+    --rojo-bg: #FFF5F5;
+    --verde-wire: var(--success);
+    --amber-wire: var(--warning);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
+body { background: var(--bg-page); padding: 0; display: flex; flex-direction: column; align-items: center; color: var(--text-main); height: 100vh; width: 100vw; overflow: hidden; }
+
+/* ==========================================================================
+   2. CONTENEDOR PRINCIPAL
+   ========================================================================== */
+#app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   3. LAYOUT APP: SIDEBAR Y CONTENIDO
+   ========================================================================== */
+.sidebar {
+    width: 260px;
+    background: var(--w);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    padding: 0;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    height: 70px; display: flex; align-items: center; padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 20px; font-weight: 700; color: var(--primary); gap: 10px;
+}
+
+.sidebar-nav { flex: 1; padding: 24px 12px; overflow-y: auto; }
+
+.nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; margin-bottom: 4px;
+    border-radius: 8px; text-decoration: none;
+    color: var(--text-sec); font-weight: 500; font-size: 14px;
+    position: relative;
+    cursor: pointer;
+}
+.nav-item:hover { background: var(--bg-light); color: var(--primary); }
+.nav-item.active { background: #F0FDFA; color: var(--primary); font-weight: 600; }
+.nav-item.active::before {
+    content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 4px; height: 20px; background: var(--primary); border-radius: 0 4px 4px 0;
+}
+.badge {
+    margin-left: auto; background: var(--danger); color: var(--w);
+    padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700;
+}
+
+/* Cuadro Paciente Sidebar (Bottom) */
+.sidebar-patient {
+    padding: 20px; border-top: 1px solid var(--border); background: var(--w);
+}
+.patient-card {
+    background: var(--bg-light); padding: 16px; border-radius: 12px; border: 1px solid var(--border);
+}
+.pc-header { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.pc-avatar { width: 40px; height: 40px; background: var(--light); border-radius: 50%; display: grid; place-items: center; font-size: 20px; border: 2px solid var(--w); color: var(--text-main); }
+.pc-info p.name { font-size: 13px; font-weight: 600; color: var(--text-main); }
+.pc-info p.age { font-size: 11px; color: var(--text-meta); }
+.pc-stats { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px; color: var(--text-sec); }
+.pc-bar-bg { width: 100%; height: 6px; background: var(--light); border-radius: 3px; }
+.pc-bar-fill { height: 100%; background: var(--success); border-radius: 3px; }
+
+/* Contenido Principal */
+.main-wrapper { flex: 1; display: flex; flex-direction: column; background: var(--bg-page); min-width: 0; height: 100%; overflow: hidden; }
+
+/* Header Superior */
+.top-header {
+    height: 70px; background: var(--w); border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 32px;
+    flex-shrink: 0;
+}
+.header-title { font-size: 20px; font-weight: 600; color: var(--text-main); }
+.header-actions { display: flex; align-items: center; gap: 24px; }
+.bell-icon { position: relative; font-size: 20px; color: var(--text-sec); cursor: pointer; text-decoration: none; }
+.bell-dot { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: var(--danger); border: 2px solid var(--w); border-radius: 50%; }
+.user-profile { display: flex; align-items: center; gap: 12px; padding-left: 24px; border-left: 1px solid var(--border); }
+.user-info { text-align: right; }
+.user-info .u-name { font-size: 13px; font-weight: 600; color: var(--text-main); }
+.user-info .u-role { font-size: 11px; color: var(--text-meta); text-transform: capitalize; }
+.u-avatar { width: 32px; height: 32px; background: var(--light); border-radius: 50%; display: grid; place-items: center; font-size: 14px; color: var(--text-sec); }
+
+.content-area { flex: 1; padding: 32px; overflow-y: auto; }
+
+/* ==========================================================================
+   4. COMPONENTES GLOBALES (Botones, Alertas, Tarjetas)
+   ========================================================================== */
+/* Alerta Banner Top */
+.alert-banner {
+    background: var(--bg-danger); border-bottom: 1px solid var(--danger);
+    padding: 16px 32px; display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0;
+}
+.ab-left { display: flex; align-items: center; gap: 16px; }
+.ab-icon { background: var(--white); width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; font-size: 18px; color: var(--danger); }
+.ab-text { font-size: 14px; font-weight: 600; color: var(--danger); }
+.ab-actions { display: flex; gap: 12px; align-items: center; }
+
+/* Botones */
+.btn { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-pri { background: var(--primary); color: var(--w); border: 1px solid var(--primary); }
+.btn-sec { background: var(--w); color: var(--primary); border: 1px solid var(--primary); }
+.btn-icon { background: transparent; border: none; font-size: 16px; color: var(--text-meta); cursor: pointer; }
+.btn-icon:hover { color: var(--primary); }
+
+/* Grid Stats (Dashboard) */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
+.stat-card { background: var(--w); padding: 24px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+.sc-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.sc-title { font-size: 13px; font-weight: 500; color: var(--text-sec); }
+.sc-icon { width: 40px; height: 40px; background: var(--bg-light); border-radius: 8px; display: grid; place-items: center; font-size: 20px; color: var(--primary); }
+.sc-value { font-size: 28px; font-weight: 700; color: var(--text-main); margin-top: 16px; }
+.sc-sub { font-size: 11px; color: var(--text-meta); margin-top: 4px; }
+.sc-trend { font-size: 12px; font-weight: 600; color: var(--success); margin-top: 12px; display: flex; align-items: center; gap: 6px; }
+
+/* Status Badges */
+.status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; border: 1px solid transparent; }
+.sb-taken { background: var(--bg-success); color: #166534; }
+.sb-missed { background: var(--bg-danger); color: #991B1B; }
+.sb-pending { background: var(--bg-warning); color: #92400E; }
+
+/* ==========================================================================
+   DASHBOARD LAYOUT (2 Columnas: Agenda | Gráfica)
+   ========================================================================== */
+.dash-cols { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.card-box { background: var(--w); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.cb-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cb-title { font-size: 15px; font-weight: 600; color: var(--text-main); }
+.cb-subtitle { font-size: 12px; color: var(--text-meta); }
+
+/* Lista Agenda */
+.agenda-list { display: flex; flex-direction: column; }
+.agenda-item { padding: 16px 24px; border-bottom: 1px solid var(--bg-light); display: flex; justify-content: space-between; align-items: center; }
+.agenda-item:hover { background: var(--bg-light); }
+.ai-left { display: flex; align-items: center; gap: 24px; }
+.ai-time { width: 60px; text-align: center; }
+.ai-time h4 { font-size: 18px; font-weight: 700; color: var(--text-main); }
+.ai-time span { font-size: 11px; color: var(--text-meta); }
+.ai-med h4 { font-size: 14px; font-weight: 600; color: var(--text-main); }
+.ai-med p { font-size: 12px; color: var(--text-sec); margin-top: 2px; }
+.ai-right { display: flex; align-items: center; gap: 16px; }
+.ai-actual { font-size: 11px; color: var(--text-meta); }
+
+/* Gráfica Barras (Recharts CSS Mock) */
+.chart-wrap { padding: 24px 24px 32px 24px; height: 340px; display: flex; flex-direction: column; }
+.chart-bars { display: flex; justify-content: space-between; align-items: flex-end; height: 200px; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 8px; }
+.c-bar-group { display: flex; flex-direction: column; align-items: center; width: 30px; height: 100%; justify-content: flex-end; gap: 12px; }
+.c-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; transition: height 0.3s ease; }
+.c-bar.excelente { background: var(--primary); }
+.c-bar.regular { background: var(--warning); }
+.c-bar.atencion { background: var(--danger); }
+.c-label { font-size: 11px; color: var(--text-meta); }
+.chart-legend { display: flex; gap: 16px; justify-content: center; margin-top: auto; font-size: 11px; color: var(--text-sec); }
+.cl-item { display: flex; align-items: center; gap: 6px; }
+.cl-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ==========================================================================
 LOGIN PAGE
    ========================================================================== */
 .login-layout { width: 100%; height: 100vh; display: grid; place-items: center; background: var(--bg-page); }
