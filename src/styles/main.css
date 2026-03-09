@@ -180,7 +180,7 @@ body { background: var(--bg-page); padding: 0; display: flex; flex-direction: co
 .sb-pending { background: var(--bg-warning); color: #92400E; }
 
 /* ==========================================================================
-   DASHBOARD LAYOUT (2 Columnas: Agenda | Gráfica)
+   5. DASHBOARD LAYOUT (2 Columnas: Agenda | Gráfica)
    ========================================================================== */
 .dash-cols { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
 .card-box { background: var(--w); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -215,7 +215,80 @@ body { background: var(--bg-page); padding: 0; display: flex; flex-direction: co
 .cl-dot { width: 10px; height: 10px; border-radius: 50%; }
 
 /* ==========================================================================
-LOGIN PAGE
+   6. PÁGINA HISTORIAL (Tablas y Filtros)
+   ========================================================================== */
+.filters-bar { background: var(--w); padding: 16px; border-radius: 12px; border: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 16px; margin-bottom: 24px; }
+.wire-input { width: 100%; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; color: var(--text-main); outline: none; background: var(--w); }
+.wire-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.1); }
+.wire-select { appearance: none; background: url('data:image/svg+xml;utf8,<svg fill="%23475569" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center; }
+
+.table-wrap { background: var(--w); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; }
+th { background: var(--bg-light); padding: 12px 24px; text-align: left; font-size: 11px; font-weight: 600; color: var(--text-sec); text-transform: uppercase; border-bottom: 1px solid var(--border); }
+td { padding: 16px 24px; border-bottom: 1px solid var(--bg-light); font-size: 13px; color: var(--text-main); }
+tr:hover { background: var(--bg-light); }
+
+.pagination { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--w); }
+.page-info { font-size: 13px; color: var(--text-sec); }
+.page-controls { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.page-btn { padding: 8px 12px; background: var(--w); border: none; border-right: 1px solid var(--border); font-size: 13px; color: var(--text-sec); cursor: pointer; }
+.page-btn:last-child { border-right: none; }
+.page-btn.active { background: var(--bg-light); font-weight: 600; color: var(--primary); }
+
+/* ==========================================================================
+   7. PÁGINA ALERTAS (Tabs y Tarjetas)
+   ========================================================================== */
+.tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.tab { padding: 12px 24px; font-size: 14px; font-weight: 500; color: var(--text-meta); text-decoration: none; border-bottom: 2px solid transparent; cursor: pointer; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+
+.al-card { background: var(--w); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid; }
+.al-high { border-left-color: var(--danger); background: #FFF5F5; }
+.al-med { border-left-color: var(--warning); background: #FFFBEB; }
+.al-info-wrap { display: flex; gap: 16px; align-items: flex-start; }
+.al-icon-box { padding: 8px; background: var(--white); border-radius: 50%; font-size: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.al-title { font-size: 16px; font-weight: 600; color: var(--text-main); }
+.al-msg { font-size: 13px; color: var(--text-sec); margin-top: 4px; }
+.al-meta { display: flex; gap: 16px; margin-top: 12px; font-size: 12px; color: var(--text-meta); }
+.al-actions { display: flex; gap: 12px; }
+
+/* ==========================================================================
+   8. PÁGINA CONFIGURACIÓN
+   ========================================================================== */
+.config-wrap { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+.cf-section { background: var(--w); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.cf-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cf-header-left { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; color: var(--text-main); }
+.cf-body { padding: 24px; }
+
+/* Grid Formulario */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--text-meta); margin-bottom: 8px; }
+.form-value { font-size: 14px; font-weight: 500; color: var(--text-main); }
+
+/* Toggles Notificaciones */
+.toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--bg-light); }
+.toggle-row:last-child { border-bottom: none; }
+.tr-text h4 { font-size: 14px; font-weight: 500; color: var(--text-main); }
+.tr-text p { font-size: 12px; color: var(--text-meta); margin-top: 2px; }
+
+/* CSS Toggle Switch (Wireframe) */
+.toggle-switch { position: relative; width: 44px; height: 24px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--light); border-radius: 24px; transition: .3s; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: .3s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+input:checked + .slider { background-color: var(--primary); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* Lista Medicamentos Config */
+.med-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--bg-light); }
+.mr-info h4 { font-size: 14px; font-weight: 500; color: var(--text-main); }
+.mr-info span { font-weight: 400; color: var(--text-meta); }
+.mr-info p { font-size: 12px; color: var(--text-sec); margin-top: 4px; }
+.mr-actions { display: flex; gap: 8px; }
+
+/* ==========================================================================
+   9. LOGIN PAGE
    ========================================================================== */
 .login-layout { width: 100%; height: 100vh; display: grid; place-items: center; background: var(--bg-page); }
 .login-box { width: 420px; background: var(--w); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
