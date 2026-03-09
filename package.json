@@ -1,0 +1,14 @@
+{
+  "name": "medialarm-web",
+  "version": "1.0.0",
+  "description": "MediAlarm Web Application",
+  "main": "index.html",
+  "scripts": {
+    "start": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  }
+}
