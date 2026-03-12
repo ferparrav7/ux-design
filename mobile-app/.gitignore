@@ -1,0 +1,42 @@
+# Built application files
+*.apk
+*.ap_
+*.aab
+*.dex
+
+# Generated files
+*.class
+*.hprof
+
+# Gradle
+.gradle/
+**/build/
+
+# Local configuration
+local.properties
+/local.properties
+
+# IDE
+.idea/
+*.iml
+.navigation/
+
+# Android Studio
+/captures
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Misc
+.DS_Store
+*.log
+bin/
+gen/
+out/
+release/
+
+# Kotlin
+*.kotlin_module
+
+# Android Profiling
+*.hprof
